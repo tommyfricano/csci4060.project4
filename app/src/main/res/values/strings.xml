@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">State Capitals quiz</string>
+    <string name="state_capitals_quiz"><u>State Capitals Quiz</u></string>
+    <string name="startButton">Start new quiz</string>
+    <string name="appDesc">This app will test your knowledge on the united states\' capitals! Click <b>start new quiz</b> below to begin! Click <b>review results</b> to view previous quiz attempts.</string>
+    <string name="review_results">Review results</string>
+
+
+</resources>
