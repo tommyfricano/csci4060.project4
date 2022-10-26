@@ -2,8 +2,14 @@
     <string name="app_name">State Capitals quiz</string>
     <string name="state_capitals_quiz"><u>State Capitals Quiz</u></string>
     <string name="startButton">Start new quiz</string>
-    <string name="appDesc">This app will test your knowledge on the united states\' capitals! Click <b>start new quiz</b> below to begin! Click <b>review results</b> to view previous quiz attempts.</string>
+    <string name="appDesc">This app will test your knowledge on the united states\' capitals! Traverse to the drawer menu to <i>start a new quiz</i> or <i>review results</i> of previous quiz attempts.</string>
     <string name="review_results">Review results</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="review_quiz_results">Review quiz results</string>
+    <string name="take_quiz">Take quiz</string>
+    <string name="get_help">Get help</string>
+    <string name="close_app">Close app</string>
 
 
 </resources>
