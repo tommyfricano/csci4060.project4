@@ -8,31 +8,20 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import android.content.ContentValues;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
-import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvValidationException;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
 
-    public static final String DEBUG_TAG = "QuizData";
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
     private NavigationView navigationView;
     private ActionBarDrawerToggle drawerToggle;
-    private QuizData quizData;
 
 
     @Override
@@ -40,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.main_activity );
 
-        quizData = new QuizData(getApplicationContext());
         // assigning ID of the toolbar to a variable
         toolbar = findViewById( R.id.toolbar );
 
@@ -64,27 +52,6 @@ public class MainActivity extends AppCompatActivity {
                     selectDrawerItem( menuItem );
                     return true;
                 });
-
-        // process questions table from csv
-        try {
-            InputStream in_s = getAssets().open("state_capitals.csv");
-            CSVReader reader = new CSVReader( new InputStreamReader( in_s ));
-            String[] nextRow;
-
-            while( ( nextRow = reader.readNext()) != null){
-                for(int i=0;i < nextRow.length;i++) {
-                    Quiz quiz = new Quiz(nextRow[0], nextRow[1]);
-                    Log.d(TAG, nextRow[0]);
-                    Log.d(TAG, nextRow[1]);
-                    new QuizDBWriter().execute(quiz);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (CsvValidationException e) {
-            e.printStackTrace();
-        }
-
     }
 
     public void selectDrawerItem( MenuItem menuItem ) {
@@ -151,37 +118,6 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected( item );
-    }
-
-    public class QuizDBWriter extends AsyncTask<Quiz, Quiz> {
-        @Override
-        protected Quiz doInBackground( Quiz... quizzes ) {
-            quizData.storeQuizQnA( quizzes[0] );
-            return quizzes[0];
-        }
-
-        @Override
-        protected void onPostExecute( Quiz quiz ) {
-            // Show a quick confirmation message
-            Toast.makeText( getApplicationContext(), "Quiz questions loaded",
-                    Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if( quizData != null ) {
-            quizData.open();
-        }
-    }
-
-    @Override
-    public void onPause(){
-        super.onPause();
-        if( quizData != null ) {
-            quizData.close();
-        }
     }
 
 }
