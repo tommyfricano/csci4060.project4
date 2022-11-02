@@ -42,6 +42,8 @@ public class MainScreen extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState ) {
         super.onViewCreated( view, savedInstanceState );
         quizData = new QuizData( getActivity());
+
+        // add if statement
         quizData.open();
         try {
             InputStream in_s = getResources().getAssets().open("state_capitals.csv");
