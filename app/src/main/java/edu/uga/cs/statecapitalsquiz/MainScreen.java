@@ -26,6 +26,7 @@ public class MainScreen extends Fragment {
         // Required empty public constructor
     }
 
+
     public static MainScreen newInstance() {
         MainScreen fragment = new MainScreen();
         return fragment;
@@ -34,6 +35,7 @@ public class MainScreen extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState ) {
+      //  Log.d(TAG, "on create view");
         // Inflate the layout for this fragment
         return inflater.inflate( R.layout.fragment_main_screen, container, false );
     }
@@ -41,29 +43,34 @@ public class MainScreen extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState ) {
         super.onViewCreated( view, savedInstanceState );
-        quizData = new QuizData( getActivity());
+     //   Log.d(TAG, "on view created");
+
+        quizData = new QuizData(getActivity());
 
         // add if statement
-        quizData.open();
-        try {
-            InputStream in_s = getResources().getAssets().open("state_capitals.csv");
-            CSVReader reader = new CSVReader( new InputStreamReader( in_s ));
-            String[] nextRow;
 
-            while( ( nextRow = reader.readNext()) != null){
+        if (quizData.numOfRows() < 50) {
+            quizData.open();
+            try {
+                InputStream in_s = getResources().getAssets().open("state_capitals.csv");
+                CSVReader reader = new CSVReader(new InputStreamReader(in_s));
+                String[] nextRow;
+
+                while ((nextRow = reader.readNext()) != null) {
                     Quiz quiz = new Quiz(nextRow[0], nextRow[1], nextRow[2], nextRow[3]);
-                    Log.d(TAG, nextRow[0]);
-                    Log.d(TAG, nextRow[1]);
-                    Log.d(TAG, nextRow[2]);
-                    Log.d(TAG, nextRow[3]);
+          /*      Log.d(TAG, nextRow[0]);
+                Log.d(TAG, nextRow[1]);
+                Log.d(TAG, nextRow[2]);
+                Log.d(TAG, nextRow[3]); */
                     new QuizDBWriter().execute(quiz);
                 }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (CsvValidationException e) {
-            e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (CsvValidationException e) {
+                e.printStackTrace();
+            }
+            quizData.close();
         }
-        quizData.close();
     }
 
     public class QuizDBWriter extends AsyncTask<Quiz, Quiz> {
@@ -75,9 +82,9 @@ public class MainScreen extends Fragment {
 
         @Override
         protected void onPostExecute( Quiz quiz ) {
-            // Show a quick confirmation message
-            Toast.makeText( getContext(), "Quiz questions loaded",
-                    Toast.LENGTH_SHORT).show();
+            // probably wrong message being shown
+          /*  Toast.makeText( getContext(), "Quiz questions loaded",
+                    Toast.LENGTH_SHORT).show();*/
         }
     }
 

@@ -3,6 +3,7 @@ package edu.uga.cs.statecapitalsquiz;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -19,7 +20,7 @@ public class QuizData {
 
     // this is a reference to our database; it is used later to run SQL commands
     private SQLiteDatabase db;
-    private SQLiteOpenHelper quizDbHelper;
+    public QuizDBHelper quizDbHelper;
     private static final String[] allColumns = {
             QuizDBHelper.QUIZ_COLUMN_ID,
             QuizDBHelper.QUIZ_COLUMN_QUESTION,
@@ -50,12 +51,22 @@ public class QuizData {
         return db.isOpen();
     }
 
+    public long numOfRows() {
+        db = quizDbHelper.getReadableDatabase();
+        long count = DatabaseUtils.queryNumEntries(db, "quiz");
+        db.close();
+        return count;
+    }
+
     public Quiz storeQuiz( Quiz quiz ) {
 
         // Prepare the values for all of the necessary columns in the table
         // and set their values to the variables of the JobLead argument.
         // This is how we are providing persistence to a JobLead (Java object) instance
         // by storing it as a new row in the database table representing job leads.
+
+
+
         ContentValues values = new ContentValues();
         values.put( QuizDBHelper.QUIZ_COLUMN_QUESTION, quiz.getQuestion());
         values.put( QuizDBHelper.QUIZ_COLUMN_ANSWER, quiz.getAnswer() );
