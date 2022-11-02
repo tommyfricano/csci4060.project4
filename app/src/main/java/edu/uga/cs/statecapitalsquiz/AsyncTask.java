@@ -70,4 +70,3 @@ public abstract class AsyncTask<Param,Result> {
     protected abstract Result doInBackground( Param... arguments );
     protected abstract void onPostExecute( Result result );
 }
-
