@@ -75,9 +75,6 @@ public class MainScreen extends Fragment {
             }
             quizData.close();
         }
-   /*     quizData.open();
-        new QuizDBReader().execute();
-        quizData.close(); */
     }
 
     public class QuizDBWriter extends AsyncTask<Quiz, Quiz> {
