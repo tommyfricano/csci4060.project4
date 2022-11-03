@@ -92,7 +92,7 @@ public class QuizData {
 
         String question = db.rawQuery(GET_QUESTION);
 */
-        ArrayList<Quiz> quizzes = new ArrayList<>();
+        List<Quiz> quizzes = new ArrayList<>();
         Cursor cursor = null;
         int columnIndex;
 
@@ -150,6 +150,7 @@ public class QuizData {
                 cursor.close();
             }
         }
+        Log.d(DEBUG_TAG, String.valueOf(quizzes));
         return quizzes;
     }
 }

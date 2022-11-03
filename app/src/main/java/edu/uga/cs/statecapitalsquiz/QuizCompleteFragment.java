@@ -39,8 +39,7 @@ public class QuizCompleteFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState ) {
         super.onViewCreated( view, savedInstanceState );
-
-        // todo grab questions and answers from db
+        // todo calculate grade and save
 
         TextView titleView = view.findViewById( R.id.quizGrade );
         String grade = "80";
