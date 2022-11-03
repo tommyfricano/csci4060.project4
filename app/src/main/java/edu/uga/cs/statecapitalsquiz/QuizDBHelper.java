@@ -32,6 +32,9 @@ public class QuizDBHelper extends SQLiteOpenHelper {
     public static final String QUIZ_COLUMN_XANSWER1 = "xanswer1";
     public static final String QUIZ_COLUMN_XANSWER2 = "xanswer2";
 
+    public static final String TABLE_RESULTS = "results";
+   
+
     // This is a reference to the only instance for the helper.
     private static QuizDBHelper helperInstance;
 

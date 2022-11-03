@@ -18,6 +18,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class MainScreen extends Fragment {
     private static final String TAG = "MainScreen";
     QuizData quizData;
@@ -80,6 +83,21 @@ public class MainScreen extends Fragment {
             return quizzes[0];
         }
 
+        @Override
+        protected void onPostExecute( Quiz quiz ) {
+            // probably wrong message being shown
+          /*  Toast.makeText( getContext(), "Quiz questions loaded",
+                    Toast.LENGTH_SHORT).show();*/
+        }
+    }
+
+    public class QuizDBReader extends AsyncTask<Quiz, Quiz> {
+
+        @Override
+        protected Quiz doInBackground(Quiz... quizzes) {
+            quizData.getQuiz();
+            return quizzes[0];
+        }
         @Override
         protected void onPostExecute( Quiz quiz ) {
             // probably wrong message being shown
