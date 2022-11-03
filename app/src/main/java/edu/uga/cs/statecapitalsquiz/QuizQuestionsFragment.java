@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -57,7 +58,7 @@ public class QuizQuestionsFragment extends Fragment {
         quizData = new QuizData(getActivity());
         // todo grab questions and answers from db
         quizData.open();
-        List<Quiz> quiz = quizData.getQuiz();
+        List<Quiz> quiz = quizData.getList();
         quizData.close();
         TextView titleView = view.findViewById( R.id.questionNumber );
         TextView question = view.findViewById(R.id.question);
@@ -95,4 +96,5 @@ public class QuizQuestionsFragment extends Fragment {
 //        Log.d( TAG, "onPause()" );
         super.onPause();
     }
+
 }

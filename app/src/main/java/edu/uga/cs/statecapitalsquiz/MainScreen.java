@@ -75,6 +75,9 @@ public class MainScreen extends Fragment {
             }
             quizData.close();
         }
+        quizData.open();
+        new QuizDBReader().execute();
+        quizData.close();
     }
 
     public class QuizDBWriter extends AsyncTask<Quiz, Quiz> {
@@ -91,12 +94,11 @@ public class MainScreen extends Fragment {
                     Toast.LENGTH_SHORT).show();*/
         }
     }
-
     public class QuizDBReader extends AsyncTask<Quiz, List<Quiz>> {
 
         @Override
         protected List<Quiz> doInBackground(Quiz... quizzes) {
-             return quizData.getQuiz();
+            return quizData.getQuiz();
         }
         @Override
         protected void onPostExecute(List<Quiz> quiz ) {
@@ -104,6 +106,7 @@ public class MainScreen extends Fragment {
                     Toast.LENGTH_SHORT).show();
         }
     }
+
 
     @Override
     public void onResume() {
