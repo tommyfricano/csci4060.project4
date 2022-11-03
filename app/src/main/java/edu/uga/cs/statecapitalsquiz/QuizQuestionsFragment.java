@@ -18,7 +18,7 @@ import java.util.List;
 public class QuizQuestionsFragment extends Fragment {
 
     private static final String TAG = "questions";
-    private static final int questions = 6;
+    private static final int questions = 7;
     private int questionNum;
     QuizData quizData = null;
 
@@ -61,10 +61,10 @@ public class QuizQuestionsFragment extends Fragment {
         String title = getString(R.string.questionNumber) + (questionNum+1);
         titleView.setText( title );
 //        Log.d(TAG, String.valueOf(quiz));
-//        question.setText(quiz.get(0).toString());
-//        btn1.setText(quiz.get(0).toString());
-//        btn2.setText(quiz.get(0).toString());
-//        btn3.setText(quiz.get(0).toString());
+        question.setText(quiz.get(questionNum).getQuestion());
+        btn1.setText(quiz.get(questionNum).getAnswer());
+        btn2.setText(quiz.get(questionNum).getXanswer1());
+        btn3.setText(quiz.get(questionNum).getXanswer2());
     }
 
     public static int getNumberOfQuestions() {

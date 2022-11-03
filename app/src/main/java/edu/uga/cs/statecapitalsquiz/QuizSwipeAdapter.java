@@ -13,7 +13,7 @@ public class QuizSwipeAdapter  extends FragmentStateAdapter {
 
     @Override
     public Fragment createFragment(int position){
-        if( position ==5 ){
+        if( position == 6 ){
             return QuizCompleteFragment.newInstance( position );
         }
         return QuizQuestionsFragment.newInstance( position );

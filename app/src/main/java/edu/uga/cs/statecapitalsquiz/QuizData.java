@@ -98,10 +98,11 @@ public class QuizData {
 
 
         try {
+            db = quizDbHelper.getReadableDatabase();
             // Execute the select query and get the Cursor to iterate over the retrieved rows
             cursor = db.query(QuizDBHelper.TABLE_QUIZ, allColumns,
                     null, null, null, null, null);
-
+            Log.d(DEBUG_TAG, "Get quiz");
             // collect all job leads into a List
             if (cursor != null && cursor.getCount() > 0) {
 
@@ -120,27 +121,29 @@ public class QuizData {
                         }
                     }
                 }
-                    for (int i = 0; i < 6; i++) {
-                        cursor.move(picked[i]);
-                        // get all attribute values of this job lead
-                        columnIndex = cursor.getColumnIndex(QuizDBHelper.QUIZ_COLUMN_ID);
-                        long id = cursor.getLong(columnIndex);
-                        columnIndex = cursor.getColumnIndex(QuizDBHelper.QUIZ_COLUMN_QUESTION);
-                        String question = cursor.getString(columnIndex);
-                        columnIndex = cursor.getColumnIndex(QuizDBHelper.QUIZ_COLUMN_ANSWER);
-                        String answer = cursor.getString(columnIndex);
-                        columnIndex = cursor.getColumnIndex(QuizDBHelper.QUIZ_COLUMN_XANSWER1);
-                        String xAnswer1 = cursor.getString(columnIndex);
-                        columnIndex = cursor.getColumnIndex(QuizDBHelper.QUIZ_COLUMN_XANSWER2);
-                        String xAnswer2 = cursor.getString(columnIndex);
+                for (int i = 0; i < 6; i++) {
+                    cursor.move(picked[i]);
+                    // get all attribute values of this job lead
+                    columnIndex = cursor.getColumnIndex(QuizDBHelper.QUIZ_COLUMN_ID);
+                    long id = cursor.getLong(columnIndex);
+//                    Log.d(DEBUG_TAG, "Quiz loaded: " + id);
+                    columnIndex = cursor.getColumnIndex(QuizDBHelper.QUIZ_COLUMN_QUESTION);
+                    String question = cursor.getString(columnIndex);
+//                    Log.d(DEBUG_TAG, "Quiz loaded: " + question);
+                    columnIndex = cursor.getColumnIndex(QuizDBHelper.QUIZ_COLUMN_ANSWER);
+                    String answer = cursor.getString(columnIndex);
+                    columnIndex = cursor.getColumnIndex(QuizDBHelper.QUIZ_COLUMN_XANSWER1);
+                    String xAnswer1 = cursor.getString(columnIndex);
+                    columnIndex = cursor.getColumnIndex(QuizDBHelper.QUIZ_COLUMN_XANSWER2);
+                    String xAnswer2 = cursor.getString(columnIndex);
 
-                        // create a new JobLead object and set its state to the retrieved values
-                        Quiz q = new Quiz(question, answer, xAnswer1, xAnswer2);
-                        q.setId(id); // set the id (the primary key) of this object
-                        // add it to the list
-                        quizzes.add(q);
-                        Log.d(DEBUG_TAG, "Quiz loaded: " + q);
-                    }
+                    // create a new JobLead object and set its state to the retrieved values
+                    Quiz q = new Quiz(question, answer, xAnswer1, xAnswer2);
+                    q.setId(id); // set the id (the primary key) of this object
+                    // add it to the list
+                    quizzes.add(q);
+                    Log.d(DEBUG_TAG, "Quiz loaded: " + q);
+                }
                 }
             } catch (Exception e) {
             Log.d(DEBUG_TAG, "Exception caught: " + e);
