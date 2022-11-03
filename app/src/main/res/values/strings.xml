@@ -10,6 +10,7 @@
     <string name="take_quiz">Take quiz</string>
     <string name="get_help">Get help</string>
     <string name="close_app">Close app</string>
+    <string name="questionNumber">Question: </string>
 
 
 </resources>

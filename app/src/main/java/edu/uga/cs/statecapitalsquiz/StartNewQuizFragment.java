@@ -7,15 +7,11 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager2.widget.ViewPager2;
 
 public class StartNewQuizFragment extends Fragment {
 
     public StartNewQuizFragment() {}
-
-    public static StartNewQuizFragment newInstance() {
-        StartNewQuizFragment fragment = new StartNewQuizFragment();
-        return fragment;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
@@ -26,6 +22,13 @@ public class StartNewQuizFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState ) {
         super.onViewCreated(view, savedInstanceState);
+        ViewPager2 pager = view.findViewById( R.id.viewpager2 );
 
+        QuizSwipeAdapter avpAdapter = new QuizSwipeAdapter(
+                getActivity().getSupportFragmentManager(), getLifecycle() );
+
+        pager.setOrientation( ViewPager2.ORIENTATION_HORIZONTAL );
+        pager.setAdapter( avpAdapter );
     }
+
 }
