@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class MainScreen extends Fragment {
@@ -74,6 +75,9 @@ public class MainScreen extends Fragment {
             }
             quizData.close();
         }
+   /*     quizData.open();
+        new QuizDBReader().execute();
+        quizData.close(); */
     }
 
     public class QuizDBWriter extends AsyncTask<Quiz, Quiz> {
@@ -91,18 +95,16 @@ public class MainScreen extends Fragment {
         }
     }
 
-    public class QuizDBReader extends AsyncTask<Quiz, Quiz> {
+    public class QuizDBReader extends AsyncTask<Quiz, List<Quiz>> {
 
         @Override
-        protected Quiz doInBackground(Quiz... quizzes) {
-            quizData.getQuiz();
-            return quizzes[0];
+        protected List<Quiz> doInBackground(Quiz... quizzes) {
+             return quizData.getQuiz();
         }
         @Override
-        protected void onPostExecute( Quiz quiz ) {
-            // probably wrong message being shown
-          /*  Toast.makeText( getContext(), "Quiz questions loaded",
-                    Toast.LENGTH_SHORT).show();*/
+        protected void onPostExecute(List<Quiz> quiz ) {
+            Toast.makeText( getContext(), "Quiz questions loaded",
+                    Toast.LENGTH_SHORT).show();
         }
     }
 

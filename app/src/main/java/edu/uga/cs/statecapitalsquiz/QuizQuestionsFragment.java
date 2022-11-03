@@ -5,12 +5,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +24,7 @@ public class QuizQuestionsFragment extends Fragment {
     private static final int questions = 6;
     private int questionNum;
     QuizData quizData = null;
+
 
     public static QuizQuestionsFragment newInstance(int questionNum ) {
         QuizQuestionsFragment fragment = new QuizQuestionsFragment();
@@ -37,6 +41,7 @@ public class QuizQuestionsFragment extends Fragment {
             questionNum = getArguments().getInt( "questionNum" );
         }
 
+
     }
 
     @Override
@@ -51,20 +56,22 @@ public class QuizQuestionsFragment extends Fragment {
         super.onViewCreated( view, savedInstanceState );
         quizData = new QuizData(getActivity());
         // todo grab questions and answers from db
+        quizData.open();
         List<Quiz> quiz = quizData.getQuiz();
+        quizData.close();
         TextView titleView = view.findViewById( R.id.questionNumber );
         TextView question = view.findViewById(R.id.question);
         RadioButton btn1 = view.findViewById(R.id.radioButton);
         RadioButton btn2 = view.findViewById(R.id.radioButton2);
         RadioButton btn3 = view.findViewById(R.id.radioButton3);
 
-        String title = getString(R.string.questionNumber) + (questionNum+1);
+        String title = getString(R.string.questionNumber) + " "  + (questionNum+1);
         titleView.setText( title );
 //        Log.d(TAG, String.valueOf(quiz));
-//        question.setText(quiz.get(0).toString());
-//        btn1.setText(quiz.get(0).toString());
-//        btn2.setText(quiz.get(0).toString());
-//        btn3.setText(quiz.get(0).toString());
+        question.setText(quiz.get(questionNum).getQuestion());
+        btn1.setText(quiz.get(questionNum).getXanswer1());
+        btn2.setText(quiz.get(questionNum).getXanswer2());
+        btn3.setText(quiz.get(questionNum).getAnswer());
     }
 
     public static int getNumberOfQuestions() {

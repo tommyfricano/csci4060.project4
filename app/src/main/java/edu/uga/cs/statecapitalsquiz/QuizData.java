@@ -85,17 +85,10 @@ public class QuizData {
 
     public List<Quiz> getQuiz() {
 
-  /*
-        String GET_QUESTION = "SELECT " + QuizDBHelper.QUIZ_COLUMN_ID
-                + " FROM " + QuizDBHelper.TABLE_QUIZ
-                + " WHERE " + QuizDBHelper.QUIZ_COLUMN_ID + "= " + num;
-
-        String question = db.rawQuery(GET_QUESTION);
-*/
         List<Quiz> quizzes = new ArrayList<>();
         Cursor cursor = null;
         int columnIndex;
-
+        this.open();
 
         try {
             // Execute the select query and get the Cursor to iterate over the retrieved rows
@@ -115,13 +108,15 @@ public class QuizData {
                         for (int j = 0; j < i; j++) {
                             if (picked[i] == picked[j]) {
                                 distinct = false;
-                                picked[i] = r.nextInt(51);
+                                picked[i] = r.nextInt(50);
                             }
                         }
                     }
                 }
                     for (int i = 0; i < 6; i++) {
-                        cursor.move(picked[i]);
+                        Log.d(DEBUG_TAG, "" + picked[i]);
+
+                        cursor.moveToPosition(picked[i]);
                         // get all attribute values of this job lead
                         columnIndex = cursor.getColumnIndex(QuizDBHelper.QUIZ_COLUMN_ID);
                         long id = cursor.getLong(columnIndex);
@@ -139,7 +134,7 @@ public class QuizData {
                         q.setId(id); // set the id (the primary key) of this object
                         // add it to the list
                         quizzes.add(q);
-                        Log.d(DEBUG_TAG, "Quiz loaded: " + q);
+                        Log.d(DEBUG_TAG, "Quiz loaded: " + q.getQuestion());
                     }
                 }
             } catch (Exception e) {
@@ -151,6 +146,7 @@ public class QuizData {
             }
         }
         Log.d(DEBUG_TAG, String.valueOf(quizzes));
+        this.close();
         return quizzes;
     }
 }
