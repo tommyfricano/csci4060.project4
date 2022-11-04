@@ -41,8 +41,6 @@ public class QuizQuestionsFragment extends Fragment {
         if( getArguments() != null ) {
             questionNum = getArguments().getInt( "questionNum" );
         }
-
-
     }
 
     @Override
@@ -66,9 +64,8 @@ public class QuizQuestionsFragment extends Fragment {
         RadioButton btn2 = view.findViewById(R.id.radioButton2);
         RadioButton btn3 = view.findViewById(R.id.radioButton3);
 
-        String title = getString(R.string.questionNumber) + " "  + (questionNum+1);
+        String title = getString(R.string.questionNumber) + " " + (questionNum+1);
         titleView.setText( title );
-//        Log.d(TAG, String.valueOf(quiz));
         question.setText(quiz.get(questionNum).getQuestion());
         btn1.setText(quiz.get(questionNum).getXanswer1());
         btn2.setText(quiz.get(questionNum).getXanswer2());

@@ -107,7 +107,6 @@ public class MainScreen extends Fragment {
         }
     }
 
-
     @Override
     public void onResume() {
         Log.d( TAG, "on resume" );

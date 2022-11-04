@@ -93,6 +93,7 @@ public class QuizData {
         int columnIndex;
         this.open();
 
+
         try {
             // Execute the select query and get the Cursor to iterate over the retrieved rows
             cursor = db.query(QuizDBHelper.TABLE_QUIZ, allColumns,
@@ -153,7 +154,8 @@ public class QuizData {
         quiz = quizzes;
         return quizzes;
     }
-public List<Quiz> getList() {
-        return quiz;
-}
+
+    public List<Quiz> getList() {
+            return quiz;
+    }
 }
