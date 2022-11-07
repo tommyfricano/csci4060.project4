@@ -5,8 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,27 +14,25 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 public class QuizQuestionsFragment extends Fragment {
 
     private static final String TAG = "questions";
-    private static final int questions = 6;
+    private static final int questions = 7;
     private int questionNum;
     QuizData quizData = null;
     List<Quiz> quiz = null;
-    StartNewQuizFragment startNewQuizFragment;
+    private static Double points = 0.0;
 
-    public static QuizQuestionsFragment newInstance(int questionNum ) {
+    public static QuizQuestionsFragment newInstance(int questionNum) {
         QuizQuestionsFragment fragment = new QuizQuestionsFragment();
         Bundle args = new Bundle();
         args.putInt( "questionNum", questionNum );
+//        args.putDouble("points", points);
+//        Log.d(TAG, String.valueOf(points));
         fragment.setArguments( args );
         return fragment;
     }
@@ -44,6 +42,9 @@ public class QuizQuestionsFragment extends Fragment {
         super.onCreate( savedInstanceState );
         if( getArguments() != null ) {
             questionNum = getArguments().getInt( "questionNum" );
+//            points = StartNewQuizFragment.newInstance().getArguments().getDouble("points");
+//            points = getArguments().getDouble("points");
+            quiz = (List<Quiz>) StartNewQuizFragment.newInstance().getArguments().getSerializable("quizData");
         }
     }
 
@@ -57,13 +58,15 @@ public class QuizQuestionsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState ) {
         super.onViewCreated( view, savedInstanceState );
+        Log.d(TAG, String.valueOf(points));
+
         quizData = new QuizData(getActivity());
         quizData.open();
-        List<Quiz> quiz = (List<Quiz>) StartNewQuizFragment.newInstance().getArguments().getSerializable("quizData");
-        Log.d(TAG, String.valueOf(quiz));
+//        List<Quiz> quiz = (List<Quiz>) StartNewQuizFragment.newInstance().getArguments().getSerializable("quizData");
         quizData.close();
         TextView titleView = view.findViewById( R.id.questionNumber );
         TextView question = view.findViewById(R.id.question);
+        RadioGroup radioGroup = view.findViewById(R.id.radioGroup);
 
 
         String title = getString(R.string.questionNumber) + " " + (questionNum+1);
@@ -83,16 +86,41 @@ public class QuizQuestionsFragment extends Fragment {
         btn2.setText(quiz.get(questionNum).getXanswer2());
         btn3.setText(quiz.get(questionNum).getAnswer());
 
-        if(btn1.isChecked() && quiz.get(questionNum).getAnswer() == btn1.getText()){
-//            save answer in db
 
-        }
-        else if(btn2.isChecked() && quiz.get(questionNum).getAnswer() == btn2.getText()) {
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
-        }
-        else if(btn3.isChecked() && quiz.get(questionNum).getAnswer() == btn3.getText()){
+            int checked = 0;
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                Log.d("chk", "id" + checkedId);
 
-        }
+
+                if (checkedId == btn1.getId() && quiz.get(questionNum).getAnswer().equals(btn1.getText())) {
+                    //R.id.a = RadioButton ID in layout
+                    if(checked < 1) {
+                        points = points + 1.0;
+                    }
+                    checked++;
+                }
+                 else if (checkedId == btn2.getId() && quiz.get(questionNum).getAnswer().equals(btn2.getText())) {
+                    if(checked < 1) {
+                        points = points + 1.0;
+                    }
+                    checked++;
+                }
+                else if (checkedId == btn3.getId() && quiz.get(questionNum).getAnswer().equals(btn3.getText())) {
+                    if(checked < 1) {
+                        points = points + 1.0;
+                    }
+                    checked++;
+                }
+                else{
+                    if(checked > 1){
+                        points --;
+                    }
+                }
+            }
+        });
     }
 
     public static int getNumberOfQuestions() {

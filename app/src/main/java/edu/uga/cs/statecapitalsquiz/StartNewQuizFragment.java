@@ -1,30 +1,42 @@
 package edu.uga.cs.statecapitalsquiz;
 
 import android.os.Bundle;
-import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 public class StartNewQuizFragment extends Fragment {
 
+    private static final String TAG = "start";
+
     static QuizData quizData;
     static List<Quiz> quiz;
+    static Double points;
 
     public static StartNewQuizFragment newInstance() {
         StartNewQuizFragment fragment = new StartNewQuizFragment();
         Bundle args = new Bundle();
         args.putSerializable( "quizData", (Serializable) quiz);
+        args.putDouble("points", points);
         fragment.setArguments( args );
         return fragment;
+    }
+
+    @Override
+    public void onCreate( Bundle savedInstanceState ) {
+        super.onCreate( savedInstanceState );
+        points = 0.0;
+        if( getArguments() != null ) {
+        }
     }
 
     @Override
@@ -39,6 +51,7 @@ public class StartNewQuizFragment extends Fragment {
         ViewPager2 pager = view.findViewById( R.id.viewpager2 );
         quizData = new QuizData(getActivity());
         quiz = quizData.getQuiz();
+        points = 0.0;
 
         QuizSwipeAdapter avpAdapter = new QuizSwipeAdapter(
                 getActivity().getSupportFragmentManager(), getLifecycle() );
@@ -47,8 +60,11 @@ public class StartNewQuizFragment extends Fragment {
         pager.setAdapter( avpAdapter );
     }
 
-    public List<Quiz> getData() {
-        return quiz;
+    @Override
+    public void onResume() {
+//        Log.d( TAG, "on resume" );
+        super.onResume();
+        points = 0.0;
     }
 
 }

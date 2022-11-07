@@ -1,6 +1,7 @@
 package edu.uga.cs.statecapitalsquiz;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +12,17 @@ import androidx.fragment.app.Fragment;
 
 public class QuizCompleteFragment extends Fragment {
 
-    private int questionNum;
+    private static final String TAG = "complete";
 
-    public static QuizCompleteFragment newInstance(int questionNum ) {
+    TextView titleView;
+    private int questionNum;
+    private static Double points;
+
+    public static QuizCompleteFragment newInstance(int questionNum) {
         QuizCompleteFragment fragment = new QuizCompleteFragment();
         Bundle args = new Bundle();
         args.putInt( "questionNum", questionNum );
+//        args.putDouble("points", points);
         fragment.setArguments( args );
         return fragment;
     }
@@ -26,6 +32,8 @@ public class QuizCompleteFragment extends Fragment {
         super.onCreate( savedInstanceState );
         if( getArguments() != null ) {
             questionNum = getArguments().getInt( "questionNum" );
+            points = getArguments().getDouble("points");
+            Log.d(TAG, String.valueOf(points));
         }
     }
 
@@ -42,7 +50,8 @@ public class QuizCompleteFragment extends Fragment {
         // todo calculate grade and save
 
         TextView titleView = view.findViewById( R.id.quizGrade );
-        String grade = "80";
+        Double gradeCalc = points/6.0;
+        String grade = String.valueOf(gradeCalc);
         titleView.setText( grade );
     }
 
