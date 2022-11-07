@@ -48,6 +48,7 @@ public class QuizDBHelper extends SQLiteOpenHelper {
 //    public static final String RESULTS_COLUMN_ANSWER6 = "answer6";
     public static final String RESULTS_NUM_OF_CORRECT = "score";
     public static final String RESULTS_NUM_OF_ANSWERED = "answered";
+    public static final String RESULTS_DATETIME = "date_time";
 
    
     private static final String CREATE_RESULTS =
@@ -60,7 +61,8 @@ public class QuizDBHelper extends SQLiteOpenHelper {
             + RESULTS_COLUMN_QUESTION5 + " TEXT, "
             + RESULTS_COLUMN_QUESTION6 + " TEXT, "
             + RESULTS_NUM_OF_CORRECT + " INTEGER, "
-            + RESULTS_NUM_OF_ANSWERED + " INTEGER"
+            + RESULTS_NUM_OF_ANSWERED + " INTEGER, "
+            + RESULTS_DATETIME + " DATETIME"
             + ")";
 
     // This is a reference to the only instance for the helper.
