@@ -22,6 +22,7 @@ public class QuizData {
     // this is a reference to our database; it is used later to run SQL commands
     private SQLiteDatabase db;
     public QuizDBHelper quizDbHelper;
+    private List<Quiz> quiz;
     private static final String[] allColumns = {
             QuizDBHelper.QUIZ_COLUMN_ID,
             QuizDBHelper.QUIZ_COLUMN_QUESTION,
@@ -29,7 +30,6 @@ public class QuizData {
             QuizDBHelper.QUIZ_COLUMN_XANSWER1,
             QuizDBHelper.QUIZ_COLUMN_XANSWER2
     };
-    private List<Quiz> quiz;
 
     public QuizData(Context context) {
         this.quizDbHelper = QuizDBHelper.getInstance(context);
@@ -149,13 +149,14 @@ public class QuizData {
                 cursor.close();
             }
         }
-        Log.d(DEBUG_TAG, String.valueOf(quizzes));
-        this.close();
-        quiz = quizzes;
+//        Log.d(DEBUG_TAG, String.valueOf(quizzes));
+        quiz = new ArrayList<>(quizzes);
+        Log.d(DEBUG_TAG, String.valueOf(quiz));
         return quizzes;
     }
 
     public List<Quiz> getList() {
-            return quiz;
+        Log.d(DEBUG_TAG, String.valueOf(quiz));
+        return quiz;
     }
 }

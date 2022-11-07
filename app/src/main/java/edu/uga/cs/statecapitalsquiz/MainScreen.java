@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -62,10 +63,10 @@ public class MainScreen extends Fragment {
 
                 while ((nextRow = reader.readNext()) != null) {
                     Quiz quiz = new Quiz(nextRow[0], nextRow[1], nextRow[2], nextRow[3]);
-          /*      Log.d(TAG, nextRow[0]);
-                Log.d(TAG, nextRow[1]);
-                Log.d(TAG, nextRow[2]);
-                Log.d(TAG, nextRow[3]); */
+//                Log.d(TAG, nextRow[0]);
+//                Log.d(TAG, nextRow[1]);
+//                Log.d(TAG, nextRow[2]);
+//                Log.d(TAG, nextRow[3]);
                     new QuizDBWriter().execute(quiz);
                 }
             } catch (IOException e) {
@@ -73,11 +74,9 @@ public class MainScreen extends Fragment {
             } catch (CsvValidationException e) {
                 e.printStackTrace();
             }
-            quizData.close();
         }
-        quizData.open();
-        new QuizDBReader().execute();
-        quizData.close();
+//        new QuizDBReader().execute();
+//        quizData.close();
     }
 
     public class QuizDBWriter extends AsyncTask<Quiz, Quiz> {
@@ -94,18 +93,19 @@ public class MainScreen extends Fragment {
                     Toast.LENGTH_SHORT).show();*/
         }
     }
-    public class QuizDBReader extends AsyncTask<Quiz, List<Quiz>> {
-
-        @Override
-        protected List<Quiz> doInBackground(Quiz... quizzes) {
-            return quizData.getQuiz();
-        }
-        @Override
-        protected void onPostExecute(List<Quiz> quiz ) {
-            Toast.makeText( getContext(), "Quiz questions loaded",
-                    Toast.LENGTH_SHORT).show();
-        }
-    }
+//    public class QuizDBReader extends AsyncTask<Quiz, List<Quiz>> {
+//
+//        @Override
+//        protected List<Quiz> doInBackground(Quiz... quizzes) {
+//            return quizData.getQuiz();
+//        }
+//
+//        @Override
+//        protected void onPostExecute(List<Quiz> quiz ) {
+//            Toast.makeText( getContext(), "Quiz questions loaded",
+//                    Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
     @Override
     public void onResume() {

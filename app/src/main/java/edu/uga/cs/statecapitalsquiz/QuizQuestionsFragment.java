@@ -17,6 +17,9 @@ import androidx.fragment.app.Fragment;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class QuizQuestionsFragment extends Fragment {
@@ -25,7 +28,8 @@ public class QuizQuestionsFragment extends Fragment {
     private static final int questions = 6;
     private int questionNum;
     QuizData quizData = null;
-
+    List<Quiz> quiz = null;
+    StartNewQuizFragment startNewQuizFragment;
 
     public static QuizQuestionsFragment newInstance(int questionNum ) {
         QuizQuestionsFragment fragment = new QuizQuestionsFragment();
@@ -54,26 +58,55 @@ public class QuizQuestionsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState ) {
         super.onViewCreated( view, savedInstanceState );
         quizData = new QuizData(getActivity());
-        // todo grab questions and answers from db
         quizData.open();
-        List<Quiz> quiz = quizData.getList();
+        List<Quiz> quiz = (List<Quiz>) StartNewQuizFragment.newInstance().getArguments().getSerializable("quizData");
+        Log.d(TAG, String.valueOf(quiz));
         quizData.close();
         TextView titleView = view.findViewById( R.id.questionNumber );
         TextView question = view.findViewById(R.id.question);
-        RadioButton btn1 = view.findViewById(R.id.radioButton);
-        RadioButton btn2 = view.findViewById(R.id.radioButton2);
-        RadioButton btn3 = view.findViewById(R.id.radioButton3);
+
 
         String title = getString(R.string.questionNumber) + " " + (questionNum+1);
         titleView.setText( title );
         question.setText(quiz.get(questionNum).getQuestion());
+
+        int [] btns = {R.id.radioButton3, R.id.radioButton2, R.id.radioButton};
+        Collections.shuffle(Arrays.asList(btns));
+        RadioButton btn1 = view.findViewById(btns[0]);
+        RadioButton btn2 = view.findViewById(btns[1]);
+        RadioButton btn3 = view.findViewById(btns[2]);
         btn1.setText(quiz.get(questionNum).getXanswer1());
         btn2.setText(quiz.get(questionNum).getXanswer2());
         btn3.setText(quiz.get(questionNum).getAnswer());
+
+        if(btn1.isChecked() && quiz.get(questionNum).getAnswer() == btn1.getText()){
+//            save answer in db
+
+        }
+        else if(btn2.isChecked() && quiz.get(questionNum).getAnswer() == btn2.getText()) {
+
+        }
+        else if(btn3.isChecked() && quiz.get(questionNum).getAnswer() == btn3.getText()){
+
+        }
     }
 
     public static int getNumberOfQuestions() {
         return questions;
+    }
+
+    public class QuizDBReader extends AsyncTask<Quiz, List<Quiz>> {
+
+        @Override
+        protected List<Quiz> doInBackground(Quiz... quizzes) {
+            return quizData.getQuiz();
+        }
+
+        @Override
+        protected void onPostExecute(List<Quiz> quiz ) {
+            Toast.makeText( getContext(), "Quiz questions loaded",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
