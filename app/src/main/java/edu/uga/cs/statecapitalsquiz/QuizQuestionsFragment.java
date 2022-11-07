@@ -70,11 +70,15 @@ public class QuizQuestionsFragment extends Fragment {
         titleView.setText( title );
         question.setText(quiz.get(questionNum).getQuestion());
 
-        int [] btns = {R.id.radioButton3, R.id.radioButton2, R.id.radioButton};
-        Collections.shuffle(Arrays.asList(btns));
-        RadioButton btn1 = view.findViewById(btns[0]);
-        RadioButton btn2 = view.findViewById(btns[1]);
-        RadioButton btn3 = view.findViewById(btns[2]);
+        List<Integer> btns = new ArrayList<>();
+        btns.add(R.id.radioButton3);
+        btns.add(R.id.radioButton2);
+        btns.add(R.id.radioButton);
+        Collections.shuffle(btns);
+
+        RadioButton btn1 = view.findViewById(btns.get(2));
+        RadioButton btn2 = view.findViewById(btns.get(0));
+        RadioButton btn3 = view.findViewById(btns.get(1));
         btn1.setText(quiz.get(questionNum).getXanswer1());
         btn2.setText(quiz.get(questionNum).getXanswer2());
         btn3.setText(quiz.get(questionNum).getAnswer());
