@@ -26,13 +26,24 @@ public class QuizQuestionsFragment extends Fragment {
     QuizData quizData = null;
     List<Quiz> quiz = null;
     private static Double points = 0.0;
+    public static QuizCompleteFragment completeFragment;
+
+    TextView titleView;
+    TextView question;
+    RadioGroup radioGroup;
+    RadioButton btn1;
+    RadioButton btn2;
+    RadioButton btn3;
+
 
     public static QuizQuestionsFragment newInstance(int questionNum) {
         QuizQuestionsFragment fragment = new QuizQuestionsFragment();
+        completeFragment = new QuizCompleteFragment();
         Bundle args = new Bundle();
         args.putInt( "questionNum", questionNum );
-//        args.putDouble("points", points);
+        args.putDouble("points", points);
 //        Log.d(TAG, String.valueOf(points));
+  //      completeFragment.setArguments(args);
         fragment.setArguments( args );
         return fragment;
     }
@@ -59,19 +70,20 @@ public class QuizQuestionsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState ) {
         super.onViewCreated( view, savedInstanceState );
         Log.d(TAG, String.valueOf(points));
+   //     Log.d(TAG, "onViewCreated");
 
         quizData = new QuizData(getActivity());
         quizData.open();
 //        List<Quiz> quiz = (List<Quiz>) StartNewQuizFragment.newInstance().getArguments().getSerializable("quizData");
         quizData.close();
-        TextView titleView = view.findViewById( R.id.questionNumber );
-        TextView question = view.findViewById(R.id.question);
-        RadioGroup radioGroup = view.findViewById(R.id.radioGroup);
+        titleView = view.findViewById( R.id.questionNumber );
+        question = view.findViewById(R.id.question);
+        radioGroup = view.findViewById(R.id.radioGroup);
 
 
         String title = getString(R.string.questionNumber) + " " + (questionNum+1);
         titleView.setText( title );
-        question.setText(quiz.get(questionNum).getQuestion());
+        question.setText("What is the capital of " + quiz.get(questionNum).getQuestion() + "?");
 
         List<Integer> btns = new ArrayList<>();
         btns.add(R.id.radioButton3);
@@ -79,13 +91,12 @@ public class QuizQuestionsFragment extends Fragment {
         btns.add(R.id.radioButton);
         Collections.shuffle(btns);
 
-        RadioButton btn1 = view.findViewById(btns.get(2));
-        RadioButton btn2 = view.findViewById(btns.get(0));
-        RadioButton btn3 = view.findViewById(btns.get(1));
+        btn1 = view.findViewById(btns.get(2));
+        btn2 = view.findViewById(btns.get(0));
+        btn3 = view.findViewById(btns.get(1));
         btn1.setText(quiz.get(questionNum).getXanswer1());
         btn2.setText(quiz.get(questionNum).getXanswer2());
         btn3.setText(quiz.get(questionNum).getAnswer());
-
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
@@ -102,7 +113,7 @@ public class QuizQuestionsFragment extends Fragment {
                     }
                     checked++;
                 }
-                 else if (checkedId == btn2.getId() && quiz.get(questionNum).getAnswer().equals(btn2.getText())) {
+                else if (checkedId == btn2.getId() && quiz.get(questionNum).getAnswer().equals(btn2.getText())) {
                     if(checked < 1) {
                         points = points + 1.0;
                     }
@@ -121,6 +132,8 @@ public class QuizQuestionsFragment extends Fragment {
                 }
             }
         });
+
+
     }
 
     public static int getNumberOfQuestions() {
@@ -143,7 +156,7 @@ public class QuizQuestionsFragment extends Fragment {
 
     @Override
     public void onResume() {
-//        Log.d( TAG, "on resume" );
+        Log.d( TAG, "on resume" );
         super.onResume();
         quizData.open();
         // open the database in onResume
@@ -155,8 +168,14 @@ public class QuizQuestionsFragment extends Fragment {
     public void onPause() {
 //        todo save quiz before closing
         quizData.close();
-//        Log.d( TAG, "onPause()" );
+        System.out.println(points);
+        Log.d( TAG, "onPause()" );
         super.onPause();
     }
-
+    public double getPoints() {
+        return this.points;
+    }
+    public void setPoints(double score) {
+        this.points = score;
+    }
 }

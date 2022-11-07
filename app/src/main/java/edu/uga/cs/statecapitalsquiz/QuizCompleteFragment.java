@@ -18,12 +18,14 @@ public class QuizCompleteFragment extends Fragment {
     private int questionNum;
     private static Double points;
 
+
     public static QuizCompleteFragment newInstance(int questionNum) {
         QuizCompleteFragment fragment = new QuizCompleteFragment();
         Bundle args = new Bundle();
-        args.putInt( "questionNum", questionNum );
+//        args.putInt( "questionNum", questionNum );
 //        args.putDouble("points", points);
-        fragment.setArguments( args );
+ //       fragment.setArguments( args );
+
         return fragment;
     }
 
@@ -32,7 +34,9 @@ public class QuizCompleteFragment extends Fragment {
         super.onCreate( savedInstanceState );
         if( getArguments() != null ) {
             questionNum = getArguments().getInt( "questionNum" );
-            points = getArguments().getDouble("points");
+            points = this.getArguments().getDouble("points");
+    //        points = QuizSwipeAdapter.getFrag().points;
+            Log.d(TAG, "" + this.getArguments().getDouble("points"));
             Log.d(TAG, String.valueOf(points));
         }
     }
@@ -41,6 +45,7 @@ public class QuizCompleteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState ) {
         // Inflate the layout for this fragment
+    //    points = savedInstanceState.getDouble("points");
         return inflater.inflate(R.layout.fragment_quiz_completion, container, false );
     }
 
@@ -48,11 +53,17 @@ public class QuizCompleteFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState ) {
         super.onViewCreated( view, savedInstanceState );
         // todo calculate grade and save
-
+        QuizQuestionsFragment temp = QuizQuestionsFragment.newInstance(6);
+        this.points = temp.getPoints();
+        Log.d(TAG, "onViewCreated()");
         TextView titleView = view.findViewById( R.id.quizGrade );
-        Double gradeCalc = points/6.0;
+        Double gradeCalc = this.points/6.0;
+        gradeCalc = gradeCalc * 100;
         String grade = String.valueOf(gradeCalc);
+        grade += "%";
         titleView.setText( grade );
     }
-
+    public void setPoints(double score) {
+        this.points = score;
+    }
 }

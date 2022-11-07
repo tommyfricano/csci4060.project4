@@ -33,7 +33,35 @@ public class QuizDBHelper extends SQLiteOpenHelper {
     public static final String QUIZ_COLUMN_XANSWER2 = "xanswer2";
 
     public static final String TABLE_RESULTS = "results";
+    public static final String RESULTS_COLUMN_ID = "_rid";
+    public static final String RESULTS_COLUMN_QUESTION1 = "question1";
+ //   public static final String RESULTS_COLUMN_ANSWER1 = "answer1";
+    public static final String RESULTS_COLUMN_QUESTION2 = "question2";
+//    public static final String RESULTS_COLUMN_ANSWER2 = "answer2";
+    public static final String RESULTS_COLUMN_QUESTION3 = "question3";
+//    public static final String RESULTS_COLUMN_ANSWER3 = "answer3";
+    public static final String RESULTS_COLUMN_QUESTION4 = "question4";
+//    public static final String RESULTS_COLUMN_ANSWER4 = "answer4";
+    public static final String RESULTS_COLUMN_QUESTION5 = "question5";
+ //   public static final String RESULTS_COLUMN_ANSWER5 = "answer5";
+    public static final String RESULTS_COLUMN_QUESTION6 = "question6";
+//    public static final String RESULTS_COLUMN_ANSWER6 = "answer6";
+    public static final String RESULTS_NUM_OF_CORRECT = "score";
+    public static final String RESULTS_NUM_OF_ANSWERED = "answered";
+
    
+    private static final String CREATE_RESULTS =
+            "create table " + TABLE_RESULTS + " ("
+            + RESULTS_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + RESULTS_COLUMN_QUESTION1 + " TEXT, "
+            + RESULTS_COLUMN_QUESTION2 + " TEXT, "
+            + RESULTS_COLUMN_QUESTION3 + " TEXT, "
+            + RESULTS_COLUMN_QUESTION4 + " TEXT, "
+            + RESULTS_COLUMN_QUESTION5 + " TEXT, "
+            + RESULTS_COLUMN_QUESTION6 + " TEXT, "
+            + RESULTS_NUM_OF_CORRECT + " INTEGER, "
+            + RESULTS_NUM_OF_ANSWERED + " INTEGER"
+            + ")";
 
     // This is a reference to the only instance for the helper.
     private static QuizDBHelper helperInstance;
@@ -73,6 +101,9 @@ public class QuizDBHelper extends SQLiteOpenHelper {
     public void onCreate( SQLiteDatabase db ) {
         db.execSQL( CREATE_QUIZ );
         Log.d( DEBUG_TAG, "Table " + TABLE_QUIZ + " created" );
+        db.execSQL( CREATE_RESULTS );
+        Log.d( DEBUG_TAG, "Table " + TABLE_RESULTS + " created" );
+
     }
 
     // We should override onUpgrade method, which will be used to upgrade the database if

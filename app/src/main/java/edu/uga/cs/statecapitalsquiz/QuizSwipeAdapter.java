@@ -8,6 +8,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 public class QuizSwipeAdapter  extends FragmentStateAdapter {
 
+
     public QuizSwipeAdapter(FragmentManager fragmentManager, Lifecycle lifecycle ) {
         super( fragmentManager, lifecycle );
     }
@@ -15,13 +16,20 @@ public class QuizSwipeAdapter  extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position){
         if( position == 6 ){
-            return QuizCompleteFragment.newInstance( position );
+            QuizQuestionsFragment temp = QuizQuestionsFragment.newInstance(position);
+            QuizCompleteFragment completeFragment = QuizCompleteFragment.newInstance(position);
+            completeFragment.setPoints(temp.getPoints());
+            return completeFragment;
         }
-        return QuizQuestionsFragment.newInstance( position );
+        QuizQuestionsFragment temp = QuizQuestionsFragment.newInstance(position);
+        QuizQuestionsFragment newFrag = QuizQuestionsFragment.newInstance(position);
+        newFrag.setPoints(temp.getPoints());
+        return newFrag;
     }
 
     @Override
     public int getItemCount() {
         return QuizQuestionsFragment.getNumberOfQuestions();
     }
+
 }

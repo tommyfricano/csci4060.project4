@@ -21,9 +21,11 @@ public class StartNewQuizFragment extends Fragment {
     static QuizData quizData;
     static List<Quiz> quiz;
     static Double points;
+    private QuizCompleteFragment fin;
 
     public static StartNewQuizFragment newInstance() {
         StartNewQuizFragment fragment = new StartNewQuizFragment();
+        points = 0.0;
         Bundle args = new Bundle();
         args.putSerializable( "quizData", (Serializable) quiz);
         args.putDouble("points", points);

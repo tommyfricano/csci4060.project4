@@ -18,7 +18,7 @@ public class Quiz {
 
     public Quiz( String question, String answer, String xanswer1, String xanswer2){
         this.id = -1;
-        this.question = "What is the capital of " + question;
+        this.question = question;
         this.answer = answer;
         this.xanswer1 = xanswer1;
         this.xanswer2 = xanswer2;
