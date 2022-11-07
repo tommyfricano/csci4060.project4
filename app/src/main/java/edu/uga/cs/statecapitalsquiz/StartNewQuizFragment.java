@@ -18,6 +18,7 @@ public class StartNewQuizFragment extends Fragment {
 
     private static final String TAG = "start";
 
+    ViewPager2 viewPager2;
     static QuizData quizData;
     static List<Quiz> quiz;
     static Double points;
@@ -58,8 +59,24 @@ public class StartNewQuizFragment extends Fragment {
         QuizSwipeAdapter avpAdapter = new QuizSwipeAdapter(
                 getActivity().getSupportFragmentManager(), getLifecycle() );
 
+        viewPager2 = view.findViewById(R.id.viewpager2);
+
+        pager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            int previousPage = 0;
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                if(position < previousPage){
+                    pager.setCurrentItem(previousPage, false);
+                } else {
+                    previousPage = position;
+                }
+            }
+        });
+
         pager.setOrientation( ViewPager2.ORIENTATION_HORIZONTAL );
         pager.setAdapter( avpAdapter );
+
     }
 
     @Override
