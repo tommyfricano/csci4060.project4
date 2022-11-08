@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapter.QuizHolder>{
@@ -24,6 +26,7 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
     public QuizRecyclerAdapter(Context context, List<FullQuiz> quizList ) {
         this.context = context;
         this.values = quizList;
+        Collections.reverse(this.values);
         this.originalValues = new ArrayList<FullQuiz>( quizList );
     }
 
@@ -46,7 +49,6 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
             date_Time = itemView.findViewById( R.id.date_time);
             grade = itemView.findViewById( R.id.grade);
             answered = itemView.findViewById(R.id.answered);
-
         }
     }
 
