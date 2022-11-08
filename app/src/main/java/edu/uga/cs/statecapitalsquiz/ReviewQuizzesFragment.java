@@ -76,11 +76,11 @@ public class ReviewQuizzesFragment extends Fragment {
 
         // Execute the retrieval of the job leads in an asynchronous way,
         // without blocking the main UI thread.
-        new JobLeadDBReader().execute();
+        new QuizDBReader().execute();
     }
 
     // This is an AsyncTask class (it extends AsyncTask) to perform DB reading of job leads, asynchronously.
-    private class JobLeadDBReader extends AsyncTask<Void, List<FullQuiz>> {
+    private class QuizDBReader extends AsyncTask<Void, List<FullQuiz>> {
         // This method will run as a background process to read from db.
         // It returns a list of retrieved JobLead objects.
         // It will be automatically invoked by Android, when we call the execute method
