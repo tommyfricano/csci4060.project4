@@ -63,7 +63,13 @@ public class QuizCompleteFragment extends Fragment {
         grade += "%";
         titleView.setText( grade );
     }
+
     public void setPoints(double score) {
         this.points = score;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
     }
 }

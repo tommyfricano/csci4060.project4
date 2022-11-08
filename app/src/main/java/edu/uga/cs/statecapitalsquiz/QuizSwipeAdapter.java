@@ -15,15 +15,22 @@ public class QuizSwipeAdapter  extends FragmentStateAdapter {
 
     @Override
     public Fragment createFragment(int position){
+        QuizQuestionsFragment newFrag;
         if( position == 6 ){
             QuizQuestionsFragment temp = QuizQuestionsFragment.newInstance(position);
             QuizCompleteFragment completeFragment = QuizCompleteFragment.newInstance(position);
             completeFragment.setPoints(temp.getPoints());
             return completeFragment;
         }
-        QuizQuestionsFragment temp = QuizQuestionsFragment.newInstance(position);
-        QuizQuestionsFragment newFrag = QuizQuestionsFragment.newInstance(position);
-        newFrag.setPoints(temp.getPoints());
+        else if(position == 0){
+            newFrag = QuizQuestionsFragment.newInstance(position);
+            newFrag.setPoints(0);
+        }
+        else {
+            QuizQuestionsFragment temp = QuizQuestionsFragment.newInstance(position);
+            newFrag = QuizQuestionsFragment.newInstance(position);
+            newFrag.setPoints(temp.getPoints());
+        }
         return newFrag;
     }
 
