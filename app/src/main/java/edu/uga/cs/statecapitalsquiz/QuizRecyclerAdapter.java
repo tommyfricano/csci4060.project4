@@ -70,9 +70,9 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
 
         double grade = (fullQuiz.getScore() / 6) * 100.0;
         double gradeRound = (Math.round(grade * 100.0) / 100.0);
-        holder.date_Time.setText( fullQuiz.getDate_time());
-        holder.grade.setText(String.valueOf(gradeRound));
-        holder.answered.setText(String.valueOf(fullQuiz.getAnswered()));
+        holder.date_Time.setText("Date: " + fullQuiz.getDate_time());
+        holder.grade.setText("Grade: " + String.valueOf(gradeRound));
+        holder.answered.setText("Number of Answered: " + String.valueOf(fullQuiz.getAnswered()));
     }
 
     @Override
