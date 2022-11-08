@@ -109,7 +109,7 @@ public class QuizData {
      * @param questionNum
      * @return
      */
-    public Quiz storeCompleteQuiz(Quiz quiz, int questionNum) {
+    public Quiz storeCompleteQuiz(Quiz quiz, int questionNum, double points) {
 
         // Prepare the values for all of the necessary columns in the table
         // and set their values to the variables of the JobLead argument.
@@ -123,30 +123,35 @@ public class QuizData {
             MainScreen.fq.setQuestion1(quiz.getQuestion());
             Log.d(DEBUG_TAG, quiz.getQuestion());
             MainScreen.fq.setAnswered(1);
+            MainScreen.fq.setScore(points);
             Log.d(DEBUG_TAG, "inserted q1");
         }
         else if (questionNum == 2) {
             MainScreen.fq.setQuestion2(quiz.getQuestion());
             Log.d(DEBUG_TAG, quiz.getQuestion());
             MainScreen.fq.setAnswered(2);
+            MainScreen.fq.setScore(points);
             Log.d(DEBUG_TAG, "inserted q2");
         }
         else if (questionNum == 3) {
             MainScreen.fq.setQuestion3(quiz.getQuestion());
             Log.d(DEBUG_TAG, quiz.getQuestion());
             MainScreen.fq.setAnswered(3);
+            MainScreen.fq.setScore(points);
             Log.d(DEBUG_TAG, "inserted q3");
         }
         else if (questionNum == 4) {
             MainScreen.fq.setQuestion4(quiz.getQuestion());
             Log.d(DEBUG_TAG, quiz.getQuestion());
             MainScreen.fq.setAnswered(4);
+            MainScreen.fq.setScore(points);
             Log.d(DEBUG_TAG, "inserted q4");
         }
         else if (questionNum == 5) {
             MainScreen.fq.setQuestion5(quiz.getQuestion());
             Log.d(DEBUG_TAG, quiz.getQuestion());
             MainScreen.fq.setAnswered(5);
+            MainScreen.fq.setScore(points);
             Log.d(DEBUG_TAG, "inserted q5");
         }
         else if (questionNum == 6) {

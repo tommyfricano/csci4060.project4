@@ -166,7 +166,7 @@ public class QuizQuestionsFragment extends Fragment {
     @Override
     public void onPause() {
 //        todo save quiz before closing
-        quizData.storeCompleteQuiz(quiz.get(questionNum), questionNum + 1);
+        quizData.storeCompleteQuiz(quiz.get(questionNum), questionNum + 1, points);
         quizData.close();
         System.out.println(points);
         Log.d( TAG, "onPause()" );
