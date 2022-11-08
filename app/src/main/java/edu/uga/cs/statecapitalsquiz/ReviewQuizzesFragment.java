@@ -59,6 +59,7 @@ public class ReviewQuizzesFragment extends Fragment {
 
         // use a linear layout manager for the recycler view
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager( getActivity() );
+
         recyclerView.setLayoutManager( layoutManager );
 
         quizList = new ArrayList<FullQuiz>();
@@ -89,6 +90,7 @@ public class ReviewQuizzesFragment extends Fragment {
         protected List<FullQuiz> doInBackground( Void... params ) {
             List<FullQuiz> quizList = quizData.retrieveAllQuizzes();
 //            Log.d( TAG, "JobLeadDBReader: Job leads retrieved: " + jobLeadsList.size() );
+
             return quizList;
         }
 
@@ -99,11 +101,12 @@ public class ReviewQuizzesFragment extends Fragment {
         @Override
         protected void onPostExecute( List<FullQuiz> quizList ) {
             Log.d( TAG, "QuizDBReader: quizList.size(): " + quizList.size() );
-            quizList.addAll( quizList );
 
             // create the RecyclerAdapter and set it for the RecyclerView
             recyclerAdapter = new QuizRecyclerAdapter( getActivity(), quizList );
+            Log.d(TAG, "Recycler Adapter added");
             recyclerView.setAdapter( recyclerAdapter );
+
         }
     }
 

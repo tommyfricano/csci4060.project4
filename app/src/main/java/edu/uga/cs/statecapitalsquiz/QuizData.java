@@ -271,10 +271,10 @@ public class QuizData {
                             int answered = cursor.getInt( columnIndex );
 
                             // create a new JobLead object and set its state to the retrieved values
-                            FullQuiz fullQuiz = new FullQuiz(score, answered, date_time );
+                            FullQuiz fullQuiz = new FullQuiz(score, answered, date_time);
                             fullQuiz.setId(id); // set the id (the primary key) of this object
                             // add it to the list
-                            quizzes.add( fullQuiz );
+                            quizzes.add(fullQuiz);
 //                            Log.d(DEBUG_TAG, "Retrieved JobLead: " + jobLead);
                         }
                     }
