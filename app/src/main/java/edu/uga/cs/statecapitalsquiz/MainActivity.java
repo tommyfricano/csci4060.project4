@@ -65,9 +65,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_review:
                 fragment = new ReviewQuizzesFragment();
                 break;
-//            case R.id.menu_help:
-//                fragment = new HelpFragment();
-//                break;
+            case R.id.menu_help:
+                fragment = new HelpFragment();
+                break;
             case R.id.menu_close:
                 finish();
                 break;

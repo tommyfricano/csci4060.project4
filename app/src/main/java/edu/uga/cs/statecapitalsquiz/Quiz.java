@@ -1,5 +1,8 @@
 package edu.uga.cs.statecapitalsquiz;
 
+/*
+Object is used for the saving the quizzes from the csv and using the attributes in the quiz fragment
+ */
 public class Quiz {
 
     private long   id;
