@@ -20,7 +20,7 @@ import java.io.InputStreamReader;
 public class MainScreen extends Fragment {
     private static final String TAG = "MainScreen";
     QuizData quizData;
-
+    public static FullQuiz fq;
     public MainScreen() {
         // Required empty public constructor
     }
@@ -28,6 +28,7 @@ public class MainScreen extends Fragment {
 
     public static MainScreen newInstance() {
         MainScreen fragment = new MainScreen();
+
         return fragment;
     }
 
@@ -36,6 +37,7 @@ public class MainScreen extends Fragment {
                              Bundle savedInstanceState ) {
       //  Log.d(TAG, "on create view");
         // Inflate the layout for this fragment
+        fq = new FullQuiz();
         return inflater.inflate( R.layout.fragment_main_screen, container, false );
     }
 
@@ -43,12 +45,12 @@ public class MainScreen extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState ) {
         super.onViewCreated( view, savedInstanceState );
      //   Log.d(TAG, "on view created");
-
         quizData = new QuizData(getActivity());
 
         // add if statement
 
         if (quizData.numOfRows() < 50) {
+          //  System.out.println(quizData.numOfRows());
             quizData.open();
             try {
                 InputStream in_s = getResources().getAssets().open("state_capitals.csv");

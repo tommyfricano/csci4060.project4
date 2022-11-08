@@ -62,7 +62,7 @@ public class QuizDBHelper extends SQLiteOpenHelper {
             + RESULTS_COLUMN_QUESTION6 + " TEXT, "
             + RESULTS_NUM_OF_CORRECT + " INTEGER, "
             + RESULTS_NUM_OF_ANSWERED + " INTEGER, "
-            + RESULTS_DATETIME + " DATETIME"
+            + RESULTS_DATETIME + " TEXT"
             + ")";
 
     // This is a reference to the only instance for the helper.

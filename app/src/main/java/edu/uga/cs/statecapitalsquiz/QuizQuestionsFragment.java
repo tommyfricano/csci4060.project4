@@ -1,5 +1,6 @@
 package edu.uga.cs.statecapitalsquiz;
 
+import android.content.ContentValues;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,7 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import org.apache.commons.collections.bag.SynchronizedSortedBag;
+
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
@@ -27,6 +31,7 @@ public class QuizQuestionsFragment extends Fragment {
     List<Quiz> quiz = null;
     private static Double points = 0.0;
     public static QuizCompleteFragment completeFragment;
+    ContentValues values;
 
     TextView titleView;
     TextView question;
@@ -130,6 +135,7 @@ public class QuizQuestionsFragment extends Fragment {
                         points --;
                     }
                 }
+
             }
         });
 
@@ -167,6 +173,7 @@ public class QuizQuestionsFragment extends Fragment {
     @Override
     public void onPause() {
 //        todo save quiz before closing
+        quizData.storeCompleteQuiz(quiz.get(questionNum), questionNum + 1);
         quizData.close();
         System.out.println(points);
         Log.d( TAG, "onPause()" );

@@ -73,4 +73,7 @@ public class QuizCompleteFragment extends Fragment {
     public void onPause() {
         super.onPause();
     }
+    public double getPoints() {
+        return this.points;
+    }
 }
