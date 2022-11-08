@@ -64,7 +64,7 @@ public class StartNewQuizFragment extends Fragment {
         points = 0.0;
 
         QuizSwipeAdapter avpAdapter = new QuizSwipeAdapter(
-                getActivity().getSupportFragmentManager(), getLifecycle() );
+                getChildFragmentManager(), getLifecycle() );
 
         viewPager2 = view.findViewById(R.id.viewpager2);
 
