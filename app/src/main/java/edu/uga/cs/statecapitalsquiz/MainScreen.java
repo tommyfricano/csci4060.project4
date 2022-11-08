@@ -17,6 +17,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+/**
+ * this fragment is a splash screen that provides a short description
+ */
 public class MainScreen extends Fragment {
     private static final String TAG = "MainScreen";
     QuizData quizData;
@@ -73,6 +76,9 @@ public class MainScreen extends Fragment {
         }
     }
 
+    /**
+     * class for async saving in quiz table
+     */
     public class QuizDBWriter extends AsyncTask<Quiz, Quiz> {
         @Override
         protected Quiz doInBackground( Quiz... quizzes ) {

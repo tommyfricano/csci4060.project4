@@ -10,6 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+/**
+ * this fragment is for when the quiz is completed and displays the grade
+ */
 public class QuizCompleteFragment extends Fragment {
 
     private static final String TAG = "complete";
@@ -22,10 +25,6 @@ public class QuizCompleteFragment extends Fragment {
     public static QuizCompleteFragment newInstance(int questionNum) {
         QuizCompleteFragment fragment = new QuizCompleteFragment();
         Bundle args = new Bundle();
-//        args.putInt( "questionNum", questionNum );
-//        args.putDouble("points", points);
- //       fragment.setArguments( args );
-
         return fragment;
     }
 
@@ -35,7 +34,6 @@ public class QuizCompleteFragment extends Fragment {
         if( getArguments() != null ) {
             questionNum = getArguments().getInt( "questionNum" );
             points = this.getArguments().getDouble("points");
-    //        points = QuizSwipeAdapter.getFrag().points;
             Log.d(TAG, "" + this.getArguments().getDouble("points"));
             Log.d(TAG, String.valueOf(points));
         }
@@ -45,7 +43,6 @@ public class QuizCompleteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState ) {
         // Inflate the layout for this fragment
-    //    points = savedInstanceState.getDouble("points");
         return inflater.inflate(R.layout.fragment_quiz_completion, container, false );
     }
 

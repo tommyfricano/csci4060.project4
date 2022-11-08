@@ -7,14 +7,13 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
 /**
- * This class is facilitates storing and restoring job leads stored.
+ * This class is facilitates storing and restoring Quizzes stored.
  */
 public class QuizData {
 
@@ -73,6 +72,11 @@ public class QuizData {
         return count;
     }
 
+    /**
+     * stores quizzes from csv file with states
+     * @param quiz
+     * @return
+     */
     public Quiz storeQuiz(Quiz quiz) {
 
         // Prepare the values for all of the necessary columns in the table
@@ -99,6 +103,12 @@ public class QuizData {
         return quiz;
     }
 
+    /**
+     * stores quizzes that have been completed
+     * @param quiz
+     * @param questionNum
+     * @return
+     */
     public Quiz storeCompleteQuiz(Quiz quiz, int questionNum) {
 
         // Prepare the values for all of the necessary columns in the table
@@ -174,6 +184,10 @@ public class QuizData {
         return quiz;
     }
 
+    /**
+     * gets 6 random quiz rows to input into the quiz questions fragment
+     * @return
+     */
     public List<Quiz> getQuiz() {
 
         List<Quiz> quizzes = new ArrayList<>();
@@ -243,6 +257,10 @@ public class QuizData {
         return quizzes;
     }
 
+    /**
+     * retrieves all completed quizzes for display in review quizzes fragment and recycler
+     * @return
+     */
     public List<FullQuiz> retrieveAllQuizzes() {
             ArrayList<FullQuiz> quizzes = new ArrayList<>();
             Cursor cursor = null;

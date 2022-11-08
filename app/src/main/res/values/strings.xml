@@ -2,7 +2,7 @@
     <string name="app_name">State Capitals quiz</string>
     <string name="state_capitals_quiz"><u>State Capitals Quiz</u></string>
     <string name="startButton">Start new quiz</string>
-    <string name="appDesc">This app will test your knowledge on the united states\' capitals! Traverse to the drawer menu to <i>start a new quiz</i> or <i>review results</i> of previous quiz attempts.</string>
+    <string name="appDesc">This app will test your knowledge on the United States\' capitals! Traverse to the drawer menu to <i>start a new quiz</i> or <i>review quiz results</i> from previous quiz attempts.</string>
     <string name="review_results">Review results</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
@@ -12,8 +12,6 @@
     <string name="close_app">Close app</string>
     <string name="questionNumber">Question: </string>
     <string name="help"><u>Help</u></string>
-    <string name="start_quiz_this_will_initiate_a_new_quiz_where_you_will_answer_6_questions_and_recieve_a_final_score">Start Quiz: This will initiate a new quiz where you will answer 6 questions and receive a final score.</string>
+    <string name="start_quiz_this_will_initiate_a_new_quiz_where_you_will_answer_6_questions_and_recieve_a_final_score">Start Quiz: This will initiate a new quiz where you will answer 6 questions and receive a final score. Be careful and confirm your answer before swiping, as there is no back swiping!</string>
     <string name="review_quizzes_this_action_allows_to_se_see_past_quizzes_including_the_date_time_the_score_and_the_number_of_questions_you_answered"><![CDATA[Review Quizzes: This action allows you to see past quizzes including the date & time, the score, and the number of questions you answered.]]></string>
-
-
 </resources>

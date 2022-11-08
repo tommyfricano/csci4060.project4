@@ -20,8 +20,8 @@
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="389dp"
-        android:layout_height="140dp"
+        android:layout_width="388dp"
+        android:layout_height="241dp"
         android:paddingLeft="15dp"
         android:text="@string/start_quiz_this_will_initiate_a_new_quiz_where_you_will_answer_6_questions_and_recieve_a_final_score"
         android:textSize="28sp"

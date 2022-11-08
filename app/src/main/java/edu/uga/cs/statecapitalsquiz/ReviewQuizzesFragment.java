@@ -15,9 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+fragment for recyclerview for fullQuizzes
+ */
 public class ReviewQuizzesFragment extends Fragment {
 
-    private static final String TAG = "ReviewJobLeadsFragment";
+    private static final String TAG = "ReviewQuizzesFragment";
 
     private QuizData quizData = null;
     private List<FullQuiz> quizList;
@@ -116,7 +119,7 @@ public class ReviewQuizzesFragment extends Fragment {
         // Open the database
         if( quizData != null && !quizData.isDBOpen() ) {
             quizData.open();
-            Log.d( TAG, "ReviewJobLeadsFragment.onResume(): opening DB" );
+            Log.d( TAG, "ReviewQuizzesFragment.onResume(): opening DB" );
         }
 
         // Update the app name in the Action Bar to be the same as the app's name
@@ -131,7 +134,7 @@ public class ReviewQuizzesFragment extends Fragment {
         // close the database in onPause
         if( quizData != null ) {
             quizData.close();
-            Log.d( TAG, "ReviewJobLeadsFragment.onPause(): closing DB" );
+            Log.d( TAG, "ReviewQuizzesFragment.onPause(): closing DB" );
         }
     }
 }

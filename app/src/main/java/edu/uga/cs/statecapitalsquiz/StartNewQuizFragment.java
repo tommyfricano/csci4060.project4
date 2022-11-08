@@ -14,6 +14,9 @@ import androidx.viewpager2.widget.ViewPager2;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * starts quiz questions fragment
+ */
 public class StartNewQuizFragment extends Fragment {
 
     private static final String TAG = "start";
@@ -24,6 +27,10 @@ public class StartNewQuizFragment extends Fragment {
     static Double points;
     private QuizCompleteFragment fin;
 
+    /**
+     * newInstance for swiping
+     * @return
+     */
     public static StartNewQuizFragment newInstance() {
         StartNewQuizFragment fragment = new StartNewQuizFragment();
         points = 0.0;
@@ -61,6 +68,9 @@ public class StartNewQuizFragment extends Fragment {
 
         viewPager2 = view.findViewById(R.id.viewpager2);
 
+        /**
+         * disables left swiping
+         */
         pager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             int previousPage = 0;
             @Override

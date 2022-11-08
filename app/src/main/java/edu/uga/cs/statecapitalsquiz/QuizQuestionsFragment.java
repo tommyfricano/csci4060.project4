@@ -15,13 +15,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import org.apache.commons.collections.bag.SynchronizedSortedBag;
-
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * quiz fragment for display the question questions and answers
+ * and calculates grade
+ */
 public class QuizQuestionsFragment extends Fragment {
 
     private static final String TAG = "questions";
@@ -40,7 +41,11 @@ public class QuizQuestionsFragment extends Fragment {
     RadioButton btn2;
     RadioButton btn3;
 
-
+    /**
+     * newInstance to maintain each swipe screen and keep a page counter
+     * @param questionNum
+     * @return
+     */
     public static QuizQuestionsFragment newInstance(int questionNum) {
         QuizQuestionsFragment fragment = new QuizQuestionsFragment();
         completeFragment = new QuizCompleteFragment();
@@ -48,7 +53,6 @@ public class QuizQuestionsFragment extends Fragment {
         args.putInt( "questionNum", questionNum );
         args.putDouble("points", points);
 //        Log.d(TAG, String.valueOf(points));
-  //      completeFragment.setArguments(args);
         fragment.setArguments( args );
         return fragment;
     }
@@ -58,8 +62,6 @@ public class QuizQuestionsFragment extends Fragment {
         super.onCreate( savedInstanceState );
         if( getArguments() != null ) {
             questionNum = getArguments().getInt( "questionNum" );
-//            points = StartNewQuizFragment.newInstance().getArguments().getDouble("points");
-//            points = getArguments().getDouble("points");
             quiz = (List<Quiz>) StartNewQuizFragment.newInstance().getArguments().getSerializable("quizData");
         }
     }
@@ -79,7 +81,6 @@ public class QuizQuestionsFragment extends Fragment {
 
         quizData = new QuizData(getActivity());
         quizData.open();
-//        List<Quiz> quiz = (List<Quiz>) StartNewQuizFragment.newInstance().getArguments().getSerializable("quizData");
         quizData.close();
         titleView = view.findViewById( R.id.questionNumber );
         question = view.findViewById(R.id.question);
@@ -96,6 +97,7 @@ public class QuizQuestionsFragment extends Fragment {
         btns.add(R.id.radioButton);
         Collections.shuffle(btns);
 
+        // shuffle button ids and set them to buttons
         btn1 = view.findViewById(btns.get(2));
         btn2 = view.findViewById(btns.get(0));
         btn3 = view.findViewById(btns.get(1));
@@ -103,6 +105,9 @@ public class QuizQuestionsFragment extends Fragment {
         btn2.setText(quiz.get(questionNum).getXanswer2());
         btn3.setText(quiz.get(questionNum).getAnswer());
 
+        /**
+         * on click for radio group
+         */
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
             int checked = 0;
@@ -140,22 +145,12 @@ public class QuizQuestionsFragment extends Fragment {
         });
     }
 
+    /**
+     * used for page counter
+     * @return
+     */
     public static int getNumberOfQuestions() {
         return questions;
-    }
-
-    public class QuizDBReader extends AsyncTask<Quiz, List<Quiz>> {
-
-        @Override
-        protected List<Quiz> doInBackground(Quiz... quizzes) {
-            return quizData.getQuiz();
-        }
-
-        @Override
-        protected void onPostExecute(List<Quiz> quiz ) {
-            Toast.makeText( getContext(), "Quiz questions loaded",
-                    Toast.LENGTH_SHORT).show();
-        }
     }
 
     @Override

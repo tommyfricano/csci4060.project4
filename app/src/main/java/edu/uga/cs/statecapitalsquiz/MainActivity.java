@@ -14,6 +14,9 @@ import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
 
+/**
+ main activity sets up drawer and displays main screen fragment
+ */
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
@@ -22,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private NavigationView navigationView;
     private ActionBarDrawerToggle drawerToggle;
-
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -54,6 +56,10 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * drawer select
+     * @param menuItem
+     */
     public void selectDrawerItem( MenuItem menuItem ) {
         Fragment fragment = null;
 
