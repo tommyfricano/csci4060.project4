@@ -144,7 +144,14 @@ public class QuizData {
             Log.d(DEBUG_TAG, quiz.getQuestion());
             MainScreen.fq.setAnswered(6);
             MainScreen.fq.setScore(QuizQuestionsFragment.completeFragment.getPoints());
-            MainScreen.fq.setDate_time("" + Calendar.MONTH + "/" + Calendar.DAY_OF_MONTH +"/" + Calendar.YEAR + " " + Calendar.HOUR + ":" + Calendar.MINUTE + ":" + Calendar.SECOND);
+            MainScreen.fq.setDate_time("" + Calendar.getInstance().get(Calendar.MONTH)
+                    + "/" + Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+                    + "/" + Calendar.getInstance().get(Calendar.YEAR)
+                    + " " + Calendar.getInstance().get(Calendar.HOUR)
+                    + ":" + Calendar.getInstance().get(Calendar.MINUTE)
+                    + ":" + Calendar.getInstance().get(Calendar.SECOND)
+            );
+      //      System.out.println(Calendar.getInstance());
             Log.d(DEBUG_TAG, "inserted q6");
             this.open();
             ContentValues values = MainScreen.fq.input();
