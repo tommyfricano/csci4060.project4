@@ -18,8 +18,24 @@ public class FullQuiz {
     private int answered;
     private String date_time;
 
-    public FullQuiz() {
+    public double getScore() {
+        return score;
+    }
 
+    public int getAnswered() {
+        return answered;
+    }
+
+    public String getDate_time() {
+        return date_time;
+    }
+
+    public FullQuiz(){}
+
+    public FullQuiz(double score, int answered, String time) {
+        this.score = score;
+        this.answered =answered;
+        this.date_time = time;
     }
     public void setId(long id) {
         this.id = id;

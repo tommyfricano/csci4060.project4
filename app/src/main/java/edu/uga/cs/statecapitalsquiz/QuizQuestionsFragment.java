@@ -138,8 +138,6 @@ public class QuizQuestionsFragment extends Fragment {
 
             }
         });
-
-
     }
 
     public static int getNumberOfQuestions() {

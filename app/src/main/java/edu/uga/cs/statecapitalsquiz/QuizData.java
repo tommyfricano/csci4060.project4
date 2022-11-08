@@ -236,6 +236,60 @@ public class QuizData {
         return quizzes;
     }
 
+    public List<FullQuiz> retrieveAllQuizzes() {
+            ArrayList<FullQuiz> quizzes = new ArrayList<>();
+            Cursor cursor = null;
+            int columnIndex;
+
+            try {
+                // Execute the select query and get the Cursor to iterate over the retrieved rows
+                cursor = db.query( QuizDBHelper.TABLE_RESULTS, resultColumns,
+                        null, null, null, null, null );
+
+                // collect all job leads into a List
+                if( cursor != null && cursor.getCount() > 0 ) {
+
+                    while( cursor.moveToNext() ) {
+
+                        if( cursor.getColumnCount() >= 5) {
+
+                            // get all attribute values of this job lead
+                            columnIndex = cursor.getColumnIndex( QuizDBHelper.RESULTS_COLUMN_ID );
+                            long id = cursor.getLong( columnIndex );
+                            columnIndex = cursor.getColumnIndex( QuizDBHelper.RESULTS_DATETIME );
+                            String date_time = cursor.getString( columnIndex );
+                            columnIndex = cursor.getColumnIndex( QuizDBHelper.RESULTS_NUM_OF_CORRECT );
+                            double score = cursor.getDouble( columnIndex );
+                            columnIndex = cursor.getColumnIndex( QuizDBHelper.RESULTS_NUM_OF_ANSWERED );
+                            int answered = cursor.getInt( columnIndex );
+
+                            // create a new JobLead object and set its state to the retrieved values
+                            FullQuiz fullQuiz = new FullQuiz(score, answered, date_time );
+                            fullQuiz.setId(id); // set the id (the primary key) of this object
+                            // add it to the list
+                            quizzes.add( fullQuiz );
+//                            Log.d(DEBUG_TAG, "Retrieved JobLead: " + jobLead);
+                        }
+                    }
+                }
+                if( cursor != null )
+                    Log.d( DEBUG_TAG, "Number of records from DB: " + cursor.getCount() );
+                else
+                    Log.d( DEBUG_TAG, "Number of records from DB: 0" );
+            }
+            catch( Exception e ){
+                Log.d( DEBUG_TAG, "Exception caught: " + e );
+            }
+            finally{
+                // we should close the cursor
+                if (cursor != null) {
+                    cursor.close();
+                }
+            }
+            // return a list of retrieved job leads
+            return quizzes;
+        }
+
     public List<Quiz> getList() {
         Log.d(DEBUG_TAG, String.valueOf(quiz));
         return quiz;
