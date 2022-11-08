@@ -59,7 +59,8 @@ public class QuizCompleteFragment extends Fragment {
         TextView titleView = view.findViewById( R.id.quizGrade );
         Double gradeCalc = this.points/6.0;
         gradeCalc = gradeCalc * 100;
-        String grade = String.valueOf(gradeCalc);
+        double gradeRound = Math.round(gradeCalc * 100.0) / 100.0;
+        String grade = String.valueOf(gradeRound);
         grade += "%";
         titleView.setText( grade );
     }
